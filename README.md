@@ -15,7 +15,7 @@ Use Tampermonkey in Chrome and ensure Chrome's extension setting **Allow User Sc
 - [Read the Torn PDA Greasy Fork installation guide](docs/PDA-INSTALLATION.md)
 - [View the Greasy Fork listing](https://greasyfork.org/en/scripts/595270-touching-grass-pda-elimination-target-filter)
 - [View the PDA source](pda/Touching-Grass-PDA-Elimination-Target-Filter.user.js)
-- Current repository version: **4.1.0**
+- Current repository version: **4.1.1**
 
 For reliable installation, add the Greasy Fork `.user.js` address through Torn PDA's **Manage Scripts → plus sign → Remote load/update → Configure** screen, then tap **Fetch** and **Load**. This keeps the script connected to Greasy Fork for updates.
 
