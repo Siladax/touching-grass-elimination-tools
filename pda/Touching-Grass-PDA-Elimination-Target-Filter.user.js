@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Touching Grass PDA Elimination Target Filter
 // @namespace    siladax.torn.touching-grass
-// @version      4.1.0
+// @version      4.1.1
 // @description  Passively filters Torn PDA Elimination roster rows using an embedded FFScouter estimate snapshot.
 // @author       Siladax
 // @homepageURL  https://github.com/Siladax/touching-grass-elimination-tools
@@ -26471,20 +26471,6 @@
     badge.textContent = 'FF ' + formatStats(estimate);
   }
 
-  function collapseNodes(row) {
-    var nodes = [row];
-    var node = row.parentElement;
-    var depth = 0;
-    while (node && depth < 5) {
-      var playerLinks = node.querySelectorAll('a[href*="XID="],a[href*="user2ID="]');
-      if (playerLinks.length !== 1) break;
-      nodes.push(node);
-      node = node.parentElement;
-      depth++;
-    }
-    return nodes;
-  }
-
   function applyFilter() {
     var ownStats = parseStats(getStored('tgpda_player_stats', ''));
     var threshold = ownStats * HIDE_RATIO;
@@ -26499,11 +26485,10 @@
       var estimate = raw === undefined || raw === null ? NaN : Number(raw);
       var known = isFinite(estimate);
       var hide = isFinite(ownStats) && known && estimate >= threshold;
-      var rowNodes = collapseNodes(target.row);
-      for (var nodeIndex = 0; nodeIndex < rowNodes.length; nodeIndex++) {
-        rowNodes[nodeIndex].classList.toggle('tgpda-hidden', hide);
-        rowNodes[nodeIndex].classList.toggle('tgpda-compact', !hide);
-      }
+      // Never change positioning on a visible PDA row or any of its ancestors.
+      // Torn's mobile roster manages its own scroll layout, and overriding that
+      // positioning causes large gaps and leaves only a few rows visible.
+      target.row.classList.toggle('tgpda-hidden', hide);
       addEstimate(target, estimate);
       if (hide) hidden++; else shown++;
       if (!known) unknown++;
@@ -26559,7 +26544,7 @@
   }
 
   var style = document.createElement('style');
-  style.textContent = '.tgpda-hidden{display:none!important}.tgpda-compact{position:static!important;top:auto!important;bottom:auto!important;left:auto!important;right:auto!important;transform:none!important;translate:none!important;margin-top:0!important}.tgpda-estimate{display:block!important;color:#4d8f16!important;font-size:10px!important;font-weight:700!important;line-height:12px!important}' +
+  style.textContent = '.tgpda-hidden{display:none!important}.tgpda-estimate{display:block!important;color:#4d8f16!important;font-size:10px!important;font-weight:700!important;line-height:12px!important}' +
     '#tgpda-panel{margin:8px 0;padding:10px;background:#f4f4f4;border:1px solid #bbb;border-radius:6px;color:#333;font:13px Arial,sans-serif;box-shadow:0 1px 3px #0003}' +
     '.tgpda-title{font-size:15px;font-weight:700;color:#3f741f;margin-bottom:7px}.tgpda-controls{display:flex;gap:6px}.tgpda-controls input{min-width:0;flex:1;padding:8px;border:1px solid #aaa;border-radius:4px;background:#fff;color:#111;font-size:14px}' +
     '.tgpda-controls button{padding:8px 10px;border:1px solid #557d35;border-radius:4px;background:#62943e;color:#fff;font-weight:700}#tgpda-status{margin-top:7px;color:#333;font-weight:600}.tgpda-snapshot{margin-top:3px;color:#777;font-size:10px}';
