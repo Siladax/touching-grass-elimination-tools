@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Touching Grass Live Elimination Targets
 // @namespace    siladax.torn.touching-grass
-// @version      2.3.10
+// @version      2.3.11
 // @author       Siladax
 // @description  Filters the currently viewed Torn Elimination roster using an embedded FFScouter snapshot and displays passively observed tickets and team-chat orders.
 // @homepageURL  https://github.com/Siladax/touching-grass-elimination-tools
@@ -26536,6 +26536,8 @@
   }
 
   function scanOrdersFromTeamChat() {
+    // Do not inspect team-chat DOM while the Torn tab is unfocused.
+    if (!document.hasFocus()) return;
     let newest = null;
     const chatRoot = document.querySelector('#elimination-87,[id="elimination-87"],[data-channel*="elimination-87" i]');
     if (!chatRoot) return;
@@ -26562,17 +26564,29 @@
 
   function scheduleOrdersScan() {
     clearTimeout(ordersScanTimer);
-    ordersScanTimer = setTimeout(scanOrdersFromTeamChat, 120);
+    if (!document.hasFocus()) return;
+    ordersScanTimer = setTimeout(() => {
+      if (document.hasFocus()) scanOrdersFromTeamChat();
+    }, 120);
   }
 
   function startOrdersWatcher() {
-    scanOrdersFromTeamChat();
+    if (document.hasFocus()) scanOrdersFromTeamChat();
     new MutationObserver(mutations => {
+      if (!document.hasFocus()) return;
       if (mutations.some(mutation => {
         const target = mutation.target.nodeType === Node.ELEMENT_NODE ? mutation.target : mutation.target.parentElement;
         return target && !target.closest('#tglt-launcher,#tglt-modal');
       })) scheduleOrdersScan();
     }).observe(document.body, { childList: true, subtree: true, characterData: true });
+    window.addEventListener('focus', scheduleOrdersScan);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && document.hasFocus()) {
+        scheduleOrdersScan();
+      } else {
+        clearTimeout(ordersScanTimer);
+      }
+    });
   }
 
   function parseStats(value) {
