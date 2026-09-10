@@ -1,43 +1,49 @@
 # Torn PDA installation
 
-This guide installs the passive Touching Grass PDA Elimination Target Filter. It filters only roster rows already loaded by Torn PDA and does not require a Torn API key.
+This guide installs the Touching Grass PDA Elimination Target Filter from Greasy Fork using Torn PDA's **Remote load/update** feature. This is the preferred method because Torn PDA can fetch the script and track future updates.
 
-**Do not try to open Greasy Fork from inside Torn PDA.** Torn PDA does not provide a working path to the Greasy Fork installer. Download the script with Safari or Chrome first, then import the saved file into Torn PDA.
+The filter uses no Torn API key. It filters only roster rows already loaded by Torn PDA.
 
-## Download the script
-
-1. Outside Torn PDA, open this direct download in Safari or Chrome:
-   [Download the Touching Grass PDA userscript](https://github.com/Siladax/touching-grass-elimination-tools/raw/main/pda/Touching-Grass-PDA-Elimination-Target-Filter.user.js)
-2. If the script opens as a page of text, use the browser's **Share** or download control and choose **Save to Files**.
-3. Keep the filename ending in **.user.js**. Do not copy and paste the code.
-4. Remember the folder where you saved it, usually **Downloads**.
-
-The PDA version is also published on [Greasy Fork](https://greasyfork.org/en/scripts/595270-touching-grass-pda-elimination-target-filter), but its **Install this script** button is not the installation method used by Torn PDA.
-
-## Enable scripts in Torn PDA
+## Enable user scripts
 
 1. Open Torn PDA.
 2. Open **Settings**.
 3. Open **Advanced Browser Settings**.
 4. Enable **User Scripts**.
+5. Open **Manage Scripts**.
 
-## Import the downloaded file
+## Install from Greasy Fork using Remote URL
 
-1. In Torn PDA, open **Manage Scripts**.
-2. Tap the **cog** at the top.
-3. Choose **Import from file**.
-4. Browse to the folder where the script was saved.
-5. Select **Touching-Grass-PDA-Elimination-Target-Filter.user.js**.
-6. On the Import Options screen, leave the Touching Grass script selected.
-7. Tap **Import**.
-8. Confirm the script appears in Manage Scripts and is enabled.
-9. Reload Torn.
+1. In **Manage Scripts**, tap the **plus sign** at the top.
+2. Find **Remote load/update** and tap **Configure**.
+3. Paste this address into the **Remote URL** field:
+
+   `https://update.greasyfork.org/scripts/595270/Touching%20Grass%20PDA%20Elimination%20Target%20Filter.user.js`
+
+4. Tap **Fetch**.
+5. After Torn PDA retrieves the script, tap **Load**.
+6. Confirm **Touching Grass PDA Elimination Target Filter** appears in Manage Scripts and is enabled.
+7. Open the script settings and set **Injection time** to **End** if it is not already selected.
+8. Reload Torn.
+
+Using the Remote URL is more reliable than trying to browse to Greasy Fork inside Torn PDA. It also allows Torn PDA to recognize future script updates.
+
+## Alternative direct Greasy Fork method
+
+On Torn PDA versions that support Greasy Fork interception:
+
+1. Open the [Greasy Fork listing](https://greasyfork.org/en/scripts/595270-touching-grass-pda-elimination-target-filter) through Torn PDA.
+2. Tap **Install this script**.
+3. If Greasy Fork asks, tap **I have a userscript manager, let me install it**.
+4. Complete the Fetch and Load prompts in Torn PDA.
+
+If the install button does nothing or the listing cannot be opened in Torn PDA, use the **Remote URL** method above.
 
 ## Use the filter
 
 1. Open Torn's Elimination page.
-2. Open an opposing team's individual roster page.
-3. Wait for Torn to display the roster rows. The **Touching Grass Targets** panel should appear above them.
+2. Open an opposing team's individual roster.
+3. Wait for Torn to display roster rows. The **Touching Grass Targets** panel should appear above them.
 4. Enter your total battle stats, such as `350m`, `1.2b`, or `350000000`.
 5. Tap **Apply**.
 
@@ -45,10 +51,11 @@ Players estimated at 90% of your entered total or higher are hidden. Tap **Show 
 
 ## If the script does not appear
 
-- Confirm **User Scripts** is enabled in Advanced Browser Settings.
-- Confirm the script is switched on in Manage Scripts.
-- Confirm the downloaded filename ends in **.user.js**, not **.txt**.
-- Reload Torn after importing.
+- Confirm **User Scripts** is enabled.
+- Confirm the script is enabled in **Manage Scripts**.
+- Confirm the entire Remote URL was pasted, including the ending **.user.js**.
+- Open the script settings and set **Injection time** to **End**.
+- Reload Torn after loading the script.
 - Open an individual opposing-team roster rather than only the main Elimination standings page.
 - If another script changes the roster layout, temporarily disable it and reload.
 
@@ -62,3 +69,8 @@ Players estimated at 90% of your entered total or higher are hidden. Tap **Show 
 ## Privacy and request behavior
 
 The PDA script makes no Torn API calls, background requests, multi-page roster requests, or external-service requests. It reads and filters only roster rows already displayed by Torn PDA.
+
+## References
+
+- [Torn community guide to installing scripts in Torn PDA](https://www.torn.com/forums.php?p=threads&t=16347522)
+- [Torn PDA userscript documentation](https://github.com/Manuito83/torn-pda/blob/master/userscripts/README.md)
