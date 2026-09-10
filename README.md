@@ -12,10 +12,12 @@ Use Tampermonkey in Chrome and ensure Chrome's extension setting **Allow User Sc
 
 ## Torn PDA
 
-- [Install from Greasy Fork](https://greasyfork.org/en/scripts/595270-touching-grass-pda-elimination-target-filter)
-- [View the PDA source](pda/Touching-Grass-PDA-Elimination-Target-Filter.user.js)
-- [Read the PDA installation guide](docs/PDA-INSTALLATION.md)
+- [Download the PDA userscript](https://github.com/Siladax/touching-grass-elimination-tools/raw/main/pda/Touching-Grass-PDA-Elimination-Target-Filter.user.js)
+- [Read the required PDA file-import instructions](docs/PDA-INSTALLATION.md)
+- [View the Greasy Fork listing](https://greasyfork.org/en/scripts/595270-touching-grass-pda-elimination-target-filter)
 - Current repository version: **4.1.0**
+
+Download the PDA file with Safari or Chrome, then import it through Torn PDA's **Manage Scripts** screen. The Greasy Fork **Install this script** button is not used inside Torn PDA.
 
 The PDA version is passive: it filters only the roster rows Torn PDA has already loaded and requires no Torn API key.
 
