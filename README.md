@@ -6,7 +6,7 @@ Target-filtering userscripts for Torn City's Elimination event. The desktop and 
 
 - [Install from Greasy Fork](https://greasyfork.org/en/scripts/595263-touching-grass-live-elimination-targets)
 - [View the desktop source](desktop/Touching-Grass-Live-Elimination-Targets.user.js)
-- Current repository version: **2.3.10**
+- Current repository version: **2.3.11**
 
 Use Tampermonkey in Chrome and ensure Chrome's extension setting **Allow User Scripts** is enabled.
 
@@ -23,7 +23,7 @@ The PDA version is passive: it filters only the roster rows Torn PDA has already
 
 ## Compliance
 
-The current published scripts do not automate Torn API requests or loop through roster pages. The PDA edition makes no network requests. The desktop edition observes data Torn already retrieves and does not create automated/background Torn requests.
+The current published scripts do not automate Torn API requests or loop through roster pages. The PDA edition makes no network requests. The desktop edition observes data Torn already retrieves and does not create automated/background Torn requests. Team-chat orders are inspected only while the Torn tab has focus.
 
 ## Support
 
